@@ -1,15 +1,12 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion prop.compileSdk.toInteger()
     defaultConfig {
-        applicationId "com.example.fitu.net"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion prop.minSdk.toInteger()
+        targetSdkVersion prop.targetSdk.toInteger()
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -23,10 +20,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.kotlin.stdlib
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation prop.kotlinStdlib
+    implementation prop.supportAppcompat
+
+    testImplementation prop.junit
+
+    androidTestImplementation prop.testRunner
+    androidTestImplementation prop.espresso
 }

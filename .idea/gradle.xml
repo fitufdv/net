@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/netmodule" />
+            <option value="$PROJECT_DIR$/../keys" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

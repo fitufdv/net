@@ -1,100 +1,17 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.versions = [
-            'gradle'                 : '3.1.4',
-            'fabric'                 : '1.25.4',
-            'kotlin'                 : '1.2.61',
-
-            'compileSdk'             : 28,
-            'minSdk'                 : 15,
-            'targetSdk'              : 28,
-            'versionCode'            : 1,
-            'versionName'            : '1.0',
-
-            'kotlinStdlib'           : '1.2.61',
-            'kotlinAnkoCommon'       : '0.10.0',
-            'supportAppcompat'       : '28.0.0-alpha1',
-            'supportConstraintLayout': '1.1.2',
-            'roomRuntime'            : '1.1.1',
-            'roomRx'                 : '1.1.1',
-            'roomCompiler'           : '1.1.1',
-            'dagger'                 : '2.14.1',
-            'daggerCompiler'         : '2.14.1',
-            'rxAndroid'              : '2.0.1',
-            'rxJava'                 : '2.1.0',
-            'rxBinding'              : '2.0.0',
-            'retrofitGson'           : '2.3.0',
-            'retrofitLogging'        : '3.10.0',
-            'retrofitRx'             : '1.0.0',
-            'crashlytics'            : '2.7.1@aar',
-            'timber'                 : '4.7.0',
-
-            'junit'                  : '4.12',
-            'mockito'                : '2.21.0',
-            'hamcrest'               : '1.3',
-            'powermockJunit'         : '1.7.4',
-            'powermockMockito'       : '1.7.4',
-            'runner'                 : '1.0.2',
-            'espresso'               : '3.0.2',
-            'roomTesting'            : '1.1.1'
-    ]
-
-    ext.deps = [
-            kotlin : [
-                    'stdlib'    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlinStdlib}",
-                    'anko': "org.jetbrains.anko:anko-common:${versions.kotlinAnkoCommon}",
-            ],
-            support: [
-                    'appcompat'       : "com.android.support:appcompat-v7:${versions.supportAppcompat}",
-                    'constraintLayout': "com.android.support.constraint:constraint-layout:${versions.supportConstraintLayout}",
-            ],
-            storage: [
-                    'roomRuntime' : "android.arch.persistence.room:runtime:${versions.roomRuntime}",
-                    'roomRx'      : "android.arch.persistence.room:rxjava2:${versions.roomRx}",
-                    'roomCompiler': "android.arch.persistence.room:compiler:${versions.roomCompiler}"
-            ],
-            dagger : [
-                    'androidSupport': "com.google.dagger:dagger-android-support:${versions.dagger}",
-                    'compiler'      : "com.google.dagger:dagger-compiler:${versions.daggerCompiler}",
-            ],
-            rx     : [
-                    'android': "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}",
-                    'java'   : "io.reactivex.rxjava2:rxjava:${versions.rxJava}",
-                    'binding': "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${versions.rxBinding}",
-            ],
-            net    : [
-                    'retrofitGson'   : "com.squareup.retrofit2:converter-gson:${versions.retrofitGson}",
-                    'retrofitLogging': "com.squareup.okhttp3:logging-interceptor:${versions.retrofitLogging}",
-                    'retrofitRx'     : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${versions.retrofitRx}",
-            ],
-            log    : [
-                    'crashlytics': "com.crashlytics.sdk.android:crashlytics:${versions.crashlytics}",
-                    'timber'     : "com.jakewharton.timber:timber:${versions.timber}",
-            ],
-            test   : [
-                    'junit'           : "junit:junit:${versions.junit}",
-                    'mockito'         : "org.mockito:mockito-core:${versions.mockito}",
-                    'hamcrest'        : "org.hamcrest:hamcrest-all:${versions.hamcrest}",
-                    'powermockJunit'  : "org.powermock:powermock-module-junit4:${versions.powermockJunit}",
-                    'powermockMockito': "org.powermock:powermock-api-mockito:${versions.powermockMockito}",
-                    'runner'          : "com.android.support.test:runner:${versions.runner}",
-                    'espresso'        : "com.android.support.test.espresso:espresso-core:${versions.espresso}",
-                    'roomTesting' : "android.arch.persistence.room:testing:${versions.roomTesting}"
-            ]
-    ]
-
+    try {
+        ext.prop = project('keys').properties
+    } catch (ignored) {
+        throw new InvalidUserDataException('You should import keys repo.')
+    }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath prop.gradleBuild
+        classpath prop.kotlinPlugin
+        classpath prop.jitpackPlugin
     }
 }
 
